@@ -26,7 +26,7 @@ const generateHTML = (taskData) =>
       <span class="badge bg-primary mb-3">${taskData.type}</span>
     </div>
     <div class="card-footer">
-        <button type="button" class="btn btn-outline-primary" id=${taskData.id} data-bs-toggle ="modal" data-bs-target="#showTask" onclick="openTask.apply(this , arguments)">
+        <button type="button" class="btn btn-outline-primary" name=${taskData.id} data-bs-toggle ="modal" data-bs-target="#showTask" onclick="openTask.apply(this , arguments)">
           Open Task
         </button>
       </div>
@@ -39,7 +39,7 @@ const generateModalHTML = (taskData) => {
   <img src=${taskData.imageurl} alt="Task Image" class="card-img mb-3" />
   <strong class="text-sm text-muted ">Created on ${date.toDateString()}</strong>
   <h2 class="card-title mt-3">${taskData.title}</h2>
-  <p class="lead">${taskData.description}</p>
+  <p class="leadgit ">${taskData.description}</p>
   </div>`;
 };
 
@@ -207,7 +207,7 @@ searchBar.addEventListener("keyup", function (e) {
     taskContainer.removeChild(taskContainer.firstChild);
   }
   const searchString = e.target.value;
-  console.log(searchString);
+  // console.log(searchString);
   const filteredCharacters = globalTaskData.filter(function (character) {
     return (
       character.title.toLowerCase().includes(searchString) ||
@@ -221,12 +221,12 @@ searchBar.addEventListener("keyup", function (e) {
 });
 
 const openTask = function (e) {
-  const searchId = e.target.id;
+  const searchId = e.target.getAttribute("name");
   console.log(searchId);
 
   const getTask = globalTaskData.filter(function (taskData) {
     return taskData.id === searchId;
   });
-  console.log(getTask);
+  // console.log(getTask);
   taskModal.innerHTML = generateModalHTML(getTask[0]);
 };
